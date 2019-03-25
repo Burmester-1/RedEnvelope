@@ -1,0 +1,58 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeMap;
+
+public class RedEnvelope {
+	public static void main(String[] args) {
+	//Map<Integer,Boolean> map = new HashMap<Integer,Boolean>();
+	Map<Integer,Boolean> map = new TreeMap<Integer,Boolean>();
+	List<Integer> list = new ArrayList<Integer>();
+	double money;
+	int n;
+	int sum;
+	int a;
+	Scanner sc = new Scanner(System.in);
+	System.out.println("请输入钱数:");
+	money = sc.nextDouble();
+	System.out.println("请输入红包个数:");
+	n = sc.nextInt();
+	sum = (int) (money * 100);
+	for(int i=0;i<n;i++) {
+		do {
+			a = (int)(Math.random()*sum+1);
+		}while(map.get(a)!=null);
+		map.put(a,true);
+		list.add(a);
+	}
+	Collections.sort(list);
+	/*for(int i=0;i<list.size();i++) {
+		System.out.println(list.get(i));
+	}*/
+	
+	if(n==1) {
+		System.out.println("红包钱数为:"+money);
+	}else {
+		System.out.println("第1个红包钱数为:"+list.get(0)*1.0/100);
+		for(int i=1;i<n-1;i++) {
+			System.out.println("第"+(i+1)+"个红包钱数为:"+(list.get(i)-list.get(i-1))*1.0/100);
+		}
+		System.out.println("第"+n+"个红包钱数为:"+(sum-list.get(n-2))*1.0/100);
+	}
+	
+	/*Set<Integer> hSet = map.keySet();
+	Iterator<Integer> it = hSet.iterator();
+	while(it.hasNext()) {
+		int key = it.next();
+		System.out.println("Key:"+key+",Value:"+map.get(key));
+	}*/
+	
+	/*Set<Map.Entry<Integer,Boolean>> es= map.entrySet();
+	for(Map.Entry<Integer,Boolean> ma : es) {
+		System.out.println("Key:"+ma.getKey()+",Value:"+ma.getValue());
+	}*/
+	
+	}
+}
